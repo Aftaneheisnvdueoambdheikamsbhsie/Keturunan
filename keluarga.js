@@ -201,10 +201,9 @@ const familyData = {
     ]
 };
 // Fungsi membuat pohon keluarga
-    
-function createFamilyTree(data, container) {
+   function createFamilyTree(data, container, generation = 0) {
     const node = document.createElement('div');
-    node.className = 'node';
+    node.className = `node generation-${generation % 5}`; // Siklus warna setiap 5 generasi
     node.textContent = data.name;
 
     if (data.spouse) {
@@ -228,7 +227,7 @@ function createFamilyTree(data, container) {
         childrenContainer.className = 'children';
         container.appendChild(childrenContainer);
 
-        data.children.forEach(child => createFamilyTree(child, childrenContainer));
+        data.children.forEach(child => createFamilyTree(child, childrenContainer, generation + 1));
     }
 }
 
@@ -239,20 +238,34 @@ function renderFamilyTree() {
 }
 
 function searchFamily() {
-    const searchValue = document.getElementById('searchBar').value.toLowerCase();
+    const searchValue = document.getElementById('searchBar').value.toLowerCase().trim();
+    if (!searchValue) {
+        alert('Masukkan nama atau pasangan untuk pencarian!');
+        return;
+    }
+
     const result = findFamilyMember(familyData, searchValue);
+    const container = document.getElementById('familyTree');
+    container.innerHTML = '';
+
     if (result) {
-        const container = document.getElementById('familyTree');
-        container.innerHTML = '';
         createFamilyTree(result, container);
     } else {
-        alert('Nama tidak ditemukan!');
+        alert('Nama atau pasangan tidak ditemukan!');
+        renderFamilyTree(); // Kembali ke tampilan awal jika tidak ditemukan
     }
 }
 
 function findFamilyMember(data, name) {
-    if (data.name.toLowerCase().includes(name)) return data;
+    // Periksa nama atau pasangan
+    if (
+        data.name.toLowerCase().includes(name) ||
+        (data.spouse && data.spouse.toLowerCase().includes(name))
+    ) {
+        return data;
+    }
 
+    // Periksa anak-anak secara rekursif
     if (data.children && data.children.length > 0) {
         for (const child of data.children) {
             const found = findFamilyMember(child, name);
@@ -263,4 +276,8 @@ function findFamilyMember(data, name) {
     return null;
 }
 
+// Inisialisasi data pohon keluarga
 renderFamilyTree();
+
+// Event listener untuk tombol pencarian
+document.getElementById('searchButton').addEventListener('click', searchFamily);
