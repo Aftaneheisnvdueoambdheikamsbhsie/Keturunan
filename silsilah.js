@@ -239,7 +239,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Mulai membuat pohon keluarga
     createTree(familyData, container);
-});
 
     // Fungsi pencarian
     document.getElementById("searchButton").addEventListener("click", () => {
