@@ -213,6 +213,7 @@ const familyData = {
         return;
     }
 
+    // Fungsi membuat pohon keluarga secara dinamis
     function createTree(data, container, generation = 1) {
         const node = document.createElement("div");
         node.className = "node";
@@ -221,26 +222,33 @@ const familyData = {
 
         node.addEventListener("click", (e) => {
             e.stopPropagation();
-            const childrenContainer = node.nextElementSibling;
+
+            // Cari atau buat elemen anak
+            let childrenContainer = node.nextElementSibling;
+            if (!childrenContainer) {
+                if (data.children && data.children.length > 0) {
+                    childrenContainer = document.createElement("div");
+                    childrenContainer.className = "children";
+                    data.children.forEach((child) =>
+                        createTree(child, childrenContainer, generation + 1)
+                    );
+                    container.appendChild(childrenContainer);
+                }
+            }
+
+            // Toggle visibilitas elemen anak
             if (childrenContainer) {
                 childrenContainer.classList.toggle("active");
             }
         });
 
         container.appendChild(node);
-
-        if (data.children && data.children.length > 0) {
-            const childrenContainer = document.createElement("div");
-            childrenContainer.className = "children";
-            data.children.forEach((child) =>
-                createTree(child, childrenContainer, generation + 1)
-            );
-            container.appendChild(childrenContainer);
-        }
     }
 
+    // Mulai membuat pohon keluarga
     createTree(familyData, container);
 
+    // Fungsi pencarian
     document.getElementById("searchButton").addEventListener("click", () => {
         const searchName = document.getElementById("searchInput").value.trim().toLowerCase();
         if (!searchName) return alert("Masukkan nama untuk mencari!");
