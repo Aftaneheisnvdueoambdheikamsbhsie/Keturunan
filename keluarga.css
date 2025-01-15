@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+}
+
+.container {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+}
+
+h1 {
+    color: #4CAF50;
+}
+
+#searchBar {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#familyTree {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.spouse {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.children {
+    margin-left: 20px;
+    display: none;
+}
+
+.node {
+    margin: 10px 0;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.generation-0 {
+    background-color: #e3f2fd; /* Biru muda */
+}
+
+.generation-1 {
+    background-color: #c8e6c9; /* Hijau muda */
+}
+
+.generation-2 {
+    background-color: #ffecb3; /* Kuning muda */
+}
+
+.generation-3 {
+    background-color: #ffcdd2; /* Merah muda */
+}
+
+.generation-4 {
+    background-color: #d1c4e9; /* Ungu muda */
+}
+
+.spouse {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #555;
+}
