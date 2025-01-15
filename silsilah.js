@@ -208,34 +208,34 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Container tidak ditemukan!");
         return;
     }
+ function createTree(data, container, generation = 1) {
+    const node = document.createElement("div");
+    node.className = "node";
+    node.textContent = `${data.name}${data.spouse ? " & " + data.spouse : ""}`;
+    node.dataset.generation = generation;
 
-    function createTree(data, container, generation = 1) {
-        const node = document.createElement("div");
-        node.className = "node";
-        node.textContent = `${data.name}${data.spouse ? " & " + data.spouse : ""}`;
-        node.dataset.generation = generation;
+    container.appendChild(node);
 
-        container.appendChild(node);
+    if (data.children && data.children.length > 0) {
+        const childrenContainer = document.createElement("div");
+        childrenContainer.className = "children";
+        childrenContainer.style.display = "none"; // Sembunyikan anak-anak di awal
 
-        if (data.children && data.children.length > 0) {
-            const childrenContainer = document.createElement("div");
-            childrenContainer.className = "children";
+        node.addEventListener("click", (e) => {
+            e.stopPropagation();
+            childrenContainer.style.display =
+                childrenContainer.style.display === "none" ? "block" : "none";
+        });
 
-            // Tambah event klik untuk menampilkan/menyembunyikan anak
-            node.addEventListener("click", (e) => {
-                e.stopPropagation();
-                childrenContainer.classList.toggle("active");
-            });
-
-            data.children.forEach((child) => createTree(child, childrenContainer, generation + 1));
-            container.appendChild(childrenContainer);
-        }
+        data.children.forEach((child) => createTree(child, childrenContainer, generation + 1));
+        container.appendChild(childrenContainer);
     }
+}
 
-    // Panggil fungsi untuk membuat pohon
+
+    console.log("Memulai pembuatan pohon keluarga...");
     createTree(familyData, container);
 });
-
 
     // Fungsi pencarian
     document.getElementById("searchButton").addEventListener("click", () => {
