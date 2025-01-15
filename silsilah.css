@@ -87,13 +87,13 @@ h1 {
     display: block; /* Tampilkan elemen anak saat kelas active ditambahkan */
 }
 
-/* Gradient color for each generation */
+/* Warna berbeda untuk setiap generasi */
 .node[data-generation="1"] {
     background: linear-gradient(45deg, #ff6f61, #ff9a85);
 }
 
 .node[data-generation="2"] {
-    background: linear-gradient(45deg, #6a89cc, #a29bfe);
+    background: linear-gradient(45deg, #6a89cc, #82ccdd);
 }
 
 .node[data-generation="3"] {
@@ -108,3 +108,16 @@ h1 {
     background: linear-gradient(45deg, #f5cd79, #f3a683);
 }
 
+.node[data-generation="6"] {
+    background: linear-gradient(45deg, #9b59b6, #be79df);
+}
+
+.node[data-generation="7"] {
+    background: linear-gradient(45deg, #3498db, #5dade2);
+}
+
+/* Efek hover */
+.node:hover {
+    transform: scale(1.02);
+    border: 2px solid #fff;
+}
