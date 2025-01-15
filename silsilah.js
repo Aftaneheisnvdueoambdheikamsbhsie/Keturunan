@@ -206,7 +206,12 @@ const familyData = {
 
 // Fungsi membuat pohon keluarga
     document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("treeContainer");
+    const container = document.getElementById("family-tree-container");
+
+    if (!container) {
+        console.error("Container tidak ditemukan!");
+        return;
+    }
 
     function createTree(data, container, generation = 1) {
         const node = document.createElement("div");
