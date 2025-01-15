@@ -201,8 +201,6 @@ const familyData = {
         }
     ]
 };
-
-// Fungsi pembuatan pohon keluarga tetap sama seperti sebelumnya...
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("family-tree-container");
 
@@ -211,39 +209,33 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // Fungsi membuat pohon keluarga secara dinamis
     function createTree(data, container, generation = 1) {
-        // Buat elemen node untuk orang tua
         const node = document.createElement("div");
         node.className = "node";
         node.textContent = `${data.name}${data.spouse ? " & " + data.spouse : ""}`;
         node.dataset.generation = generation;
 
-        // Tambahkan node ke container utama
         container.appendChild(node);
 
-        // Buat elemen anak jika ada
         if (data.children && data.children.length > 0) {
             const childrenContainer = document.createElement("div");
             childrenContainer.className = "children";
 
-            // Tambahkan event click pada node untuk toggle visibilitas anak
+            // Tambah event klik untuk menampilkan/menyembunyikan anak
             node.addEventListener("click", (e) => {
                 e.stopPropagation();
                 childrenContainer.classList.toggle("active");
             });
 
-            // Rekursif untuk membuat pohon anak-anak
             data.children.forEach((child) => createTree(child, childrenContainer, generation + 1));
-
-            // Tambahkan container anak ke dalam DOM
             container.appendChild(childrenContainer);
         }
     }
 
-    // Mulai membuat pohon keluarga
+    // Panggil fungsi untuk membuat pohon
     createTree(familyData, container);
 });
+
 
     // Fungsi pencarian
     document.getElementById("searchButton").addEventListener("click", () => {
