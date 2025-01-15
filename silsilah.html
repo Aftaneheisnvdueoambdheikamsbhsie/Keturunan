@@ -8,13 +8,25 @@
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <h1>Family Tree Viewer</h1>
+        
+        <!-- Search Bar -->
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Cari nama...">
             <button id="searchButton">Cari</button>
         </div>
-        <div id="family-tree-container"></div>
+
+        <!-- Family Tree Container -->
+        <div id="family-tree-container">
+            <!-- Placeholder jika JavaScript tidak aktif -->
+            <noscript>
+                <p>Aktifkan JavaScript untuk melihat pohon keluarga.</p>
+            </noscript>
+        </div>
     </div>
+
+    <!-- JavaScript -->
     <script src="silsilah.js"></script>
 </body>
 </html>
