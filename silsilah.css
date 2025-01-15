@@ -80,7 +80,8 @@ h1 {
     margin-left: 20px;
     padding-left: 10px;
     border-left: 2px solid #ccc;
-   /*display: none;*/
+   display: none;
+    transition: all 0.3s ease;
 }
 
 .children.active {
