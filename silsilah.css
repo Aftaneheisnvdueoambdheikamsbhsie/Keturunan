@@ -1,9 +1,9 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: #f3f4f6;
+    color: #2c3e50;
 }
 
 .container {
@@ -12,13 +12,15 @@ body {
     padding: 20px;
     background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     text-align: center;
     margin-bottom: 20px;
-    color: #444;
+    color: #34495e;
+    font-weight: bold;
+    font-size: 24px;
 }
 
 .search-bar {
@@ -30,22 +32,29 @@ h1 {
 .search-bar input {
     width: 70%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: #3498db;
+    outline: none;
 }
 
 .search-bar button {
     padding: 10px 20px;
     border: none;
-    background-color: #007BFF;
+    background-color: #2980b9;
     color: white;
     border-radius: 5px;
     margin-left: 10px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .search-bar button:hover {
-    background-color: #0056b3;
+    background-color: #1f6399;
 }
 
 #family-tree-container {
@@ -54,25 +63,43 @@ h1 {
 
 .node {
     padding: 10px;
-    border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #f4f4f4;
     margin-bottom: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
 }
 
 .node:hover {
-    background-color: #e0e0e0;
+    transform: scale(1.02);
 }
 
 .children {
     margin-left: 20px;
-    border-left: 2px solid #ccc;
     padding-left: 10px;
-    display: none; /* Initially hidden */
+    border-left: 2px solid #ccc;
+    display: none;
 }
 
-.children.active {
-    display: block; /* Display when active */
+/* Gradient color for each generation */
+.node[data-generation="1"] {
+    background: linear-gradient(45deg, #ff6f61, #ff9a85);
+}
+
+.node[data-generation="2"] {
+    background: linear-gradient(45deg, #6a89cc, #a29bfe);
+}
+
+.node[data-generation="3"] {
+    background: linear-gradient(45deg, #78e08f, #38ada9);
+}
+
+.node[data-generation="4"] {
+    background: linear-gradient(45deg, #f8c291, #e55039);
+}
+
+.node[data-generation="5"] {
+    background: linear-gradient(45deg, #f5cd79, #f3a683);
 }
