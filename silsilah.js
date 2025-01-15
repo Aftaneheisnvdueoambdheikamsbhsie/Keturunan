@@ -205,34 +205,35 @@ const familyData = {
 // Fungsi pembuatan pohon keluarga tetap sama seperti sebelumnya...
 
 // Fungsi membuat pohon keluarga
+    document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("treeContainer");
+
     function createTree(data, container, generation = 1) {
-    const node = document.createElement("div");
-    node.className = "node";
-    node.textContent = `${data.name}${data.spouse ? " & " + data.spouse : ""}`;
-    node.dataset.generation = generation; // Tambahkan atribut untuk generasi
+        const node = document.createElement("div");
+        node.className = "node";
+        node.textContent = `${data.name}${data.spouse ? " & " + data.spouse : ""}`;
+        node.dataset.generation = generation;
 
-    node.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const childrenContainer = node.nextElementSibling;
-        if (childrenContainer) {
-            childrenContainer.classList.toggle("active");
+        node.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const childrenContainer = node.nextElementSibling;
+            if (childrenContainer) {
+                childrenContainer.classList.toggle("active");
+            }
+        });
+
+        container.appendChild(node);
+
+        if (data.children && data.children.length > 0) {
+            const childrenContainer = document.createElement("div");
+            childrenContainer.className = "children";
+            data.children.forEach((child) =>
+                createTree(child, childrenContainer, generation + 1)
+            );
+            container.appendChild(childrenContainer);
         }
-    });
-
-    container.appendChild(node);
-
-    if (data.children && data.children.length > 0) {
-        const childrenContainer = document.createElement("div");
-        childrenContainer.className = "children";
-        data.children.forEach(child =>
-            createTree(child, childrenContainer, generation + 1)
-        );
-        container.appendChild(childrenContainer);
     }
-}
 
-
-   
     createTree(familyData, container);
 
     document.getElementById("searchButton").addEventListener("click", () => {
@@ -241,7 +242,7 @@ const familyData = {
 
         const result = findPerson(familyData, searchName);
         if (result) {
-            alert(`Nama ditemukan: ${result.name}\nKeturunan: ${result.children?.map(child => child.name).join(", ") || "Tidak ada"}`);
+            alert(`Nama ditemukan: ${result.name}\nKeturunan: ${result.children?.map((child) => child.name).join(", ") || "Tidak ada"}`);
         } else {
             alert("Nama tidak ditemukan!");
         }
