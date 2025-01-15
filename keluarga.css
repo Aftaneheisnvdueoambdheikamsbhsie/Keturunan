@@ -3,16 +3,24 @@ body {
     background-color: #f9f9f9;
     color: #333;
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
     margin: 20px auto;
     width: 90%;
     max-width: 800px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
 h1 {
     color: #4CAF50;
+    font-size: 2em;
+    margin-bottom: 20px;
 }
 
 #searchBar {
@@ -21,6 +29,7 @@ h1 {
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 1em;
 }
 
 button {
@@ -30,6 +39,8 @@ button {
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1em;
+    margin: 5px;
 }
 
 button:hover {
@@ -41,10 +52,25 @@ button:hover {
     margin-top: 20px;
 }
 
+.node {
+    margin: 10px 0;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.node:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .spouse {
     font-style: italic;
     font-size: 0.9em;
     color: #555;
+    margin-left: 10px;
 }
 
 .children {
@@ -52,36 +78,44 @@ button:hover {
     display: none;
 }
 
-.node {
-    margin: 10px 0;
-    cursor: pointer;
-    font-weight: bold;
-    padding: 5px;
-    border-radius: 5px;
-}
-
+/* Generational Colors */
 .generation-0 {
     background-color: #e3f2fd; /* Biru muda */
+    color: #1a237e;
 }
 
 .generation-1 {
     background-color: #c8e6c9; /* Hijau muda */
+    color: #1b5e20;
 }
 
 .generation-2 {
     background-color: #ffecb3; /* Kuning muda */
+    color: #f57f17;
 }
 
 .generation-3 {
     background-color: #ffcdd2; /* Merah muda */
+    color: #b71c1c;
 }
 
 .generation-4 {
     background-color: #d1c4e9; /* Ungu muda */
+    color: #4a148c;
 }
 
-.spouse {
-    font-style: italic;
-    font-size: 0.9em;
-    color: #555;
+.generation-5 {
+    background-color: #b3e5fc; /* Biru sangat muda */
+    color: #01579b;
+}
+
+.generation-6 {
+    background-color: #dcedc8; /* Hijau sangat muda */
+    color: #33691e;
+}
+
+/* Add smooth transitions for expand/collapse */
+.children {
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
 }
