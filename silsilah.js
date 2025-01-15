@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+
 const familyData = {
     name: "Dakumi",spouse:"Kartijan",
     children: [
