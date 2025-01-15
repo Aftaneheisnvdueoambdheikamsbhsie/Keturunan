@@ -201,43 +201,50 @@ const familyData = {
         }
     ]
 };
-function createFamilyTree(data, generation = 1) {
-    const container = document.createElement('div');
-    container.className = `generation-${generation}`;
-    
-    const person = document.createElement('div');
-    person.className = 'node';
-    person.setAttribute('data-generation', generation);
-    person.innerHTML = `<strong>${data.name}</strong>${data.spouse ? ` & ${data.spouse}` : ''}`;
-    
-    container.appendChild(person);
-    
-    if (data.children && data.children.length > 0) {
-        const childrenContainer = document.createElement('div');
-        childrenContainer.className = 'children';
-        
-        data.children.forEach(child => {
-            childrenContainer.appendChild(createFamilyTree(child, generation + 1));
-        });
-        
-        container.appendChild(childrenContainer);
+// Fungsi membuat pohon keluarga
+    document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("family-tree-container");
+
+    if (!container) {
+        console.error("Container tidak ditemukan!");
+        return;
     }
-    
-    person.addEventListener('click', () => {
-        const children = person.nextElementSibling;
-        if (children) {
-            children.classList.toggle('active');
-        }
-    });
 
-    return container;
-}
+    // Fungsi membuat pohon keluarga secara dinamis
+    function createTree(data, container, generation = 1) {
+        const node = document.createElement("div");
+        node.className = "node";
+        node.textContent = `${data.name}${data.spouse ? " & " + data.spouse : ""}`;
+        node.dataset.generation = generation;
 
-document.addEventListener('DOMContentLoaded', () => {
-    const familyTreeContainer = document.getElementById('family-tree-container');
-    familyTreeContainer.appendChild(createFamilyTree(familyData));
-});
+        node.addEventListener("click", (e) => {
+            e.stopPropagation();
 
+            // Cari atau buat elemen anak
+            let childrenContainer = node.nextElementSibling;
+            if (!childrenContainer) {
+                if (data.children && data.children.length > 0) {
+                    childrenContainer = document.createElement("div");
+                    childrenContainer.className = "children";
+                    data.children.forEach((child) =>
+                        createTree(child, childrenContainer, generation + 1)
+                    );
+                    container.appendChild(childrenContainer);
+                }
+            }
+
+            // Toggle visibilitas elemen anak
+            if (childrenContainer) {
+                childrenContainer.classList.toggle("active");
+            }
+        });
+
+        container.appendChild(node);
+    }
+
+    // Mulai membuat pohon keluarga
+    createTree(familyData, container);
+    };
     // Fungsi pencarian
     document.getElementById("searchButton").addEventListener("click", () => {
         const searchName = document.getElementById("searchInput").value.trim().toLowerCase();
