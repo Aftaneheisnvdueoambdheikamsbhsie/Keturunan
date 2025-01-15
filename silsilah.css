@@ -83,6 +83,10 @@ h1 {
     display: none;
 }
 
+.children.active {
+    display: block; /* Tampilkan elemen anak saat kelas active ditambahkan */
+}
+
 /* Gradient color for each generation */
 .node[data-generation="1"] {
     background: linear-gradient(45deg, #ff6f61, #ff9a85);
