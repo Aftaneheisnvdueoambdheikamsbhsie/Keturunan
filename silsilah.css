@@ -108,8 +108,3 @@ h1 {
     background: linear-gradient(45deg, #f5cd79, #f3a683);
 }
 
-.node {
-    margin: 5px 0;
-    padding: 5px;
-    cursor: pointer;
-}
