@@ -203,9 +203,7 @@ const familyData = {
 };
 
 // Fungsi pembuatan pohon keluarga tetap sama seperti sebelumnya...
-
-// Fungsi membuat pohon keluarga
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("family-tree-container");
 
     if (!container) {
@@ -220,33 +218,28 @@ const familyData = {
         node.textContent = `${data.name}${data.spouse ? " & " + data.spouse : ""}`;
         node.dataset.generation = generation;
 
+        const childrenContainer = document.createElement("div");
+        childrenContainer.className = "children";
+
+        // Tambahkan event click untuk toggle visibilitas
         node.addEventListener("click", (e) => {
             e.stopPropagation();
-
-            // Cari atau buat elemen anak
-            let childrenContainer = node.nextElementSibling;
-            if (!childrenContainer) {
-                if (data.children && data.children.length > 0) {
-                    childrenContainer = document.createElement("div");
-                    childrenContainer.className = "children";
-                    data.children.forEach((child) =>
-                        createTree(child, childrenContainer, generation + 1)
-                    );
-                    container.appendChild(childrenContainer);
-                }
-            }
-
-            // Toggle visibilitas elemen anak
-            if (childrenContainer) {
-                childrenContainer.classList.toggle("active");
-            }
+            childrenContainer.classList.toggle("active");
         });
 
+        // Tambahkan node ke container utama
         container.appendChild(node);
+
+        // Buat elemen anak jika ada
+        if (data.children && data.children.length > 0) {
+            data.children.forEach((child) => createTree(child, childrenContainer, generation + 1));
+            container.appendChild(childrenContainer);
+        }
     }
 
     // Mulai membuat pohon keluarga
     createTree(familyData, container);
+});
 
     // Fungsi pencarian
     document.getElementById("searchButton").addEventListener("click", () => {
